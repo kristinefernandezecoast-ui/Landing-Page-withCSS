@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Amigurumi | Tinay Crochet</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #333;
+        }
+
+        /* HEADER */
+
+        header {
+            background-color: #8E44AD;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #27AE60;
+        }
+
+        /* TITLE */
+
+        .title {
+            text-align: center;
+            padding: 45px 20px;
+            background-color: #F5EEFA;
+        }
+
+        .title h1 {
+            color: #8E44AD;
+            font-size: 35px;
+        }
+
+        .title p {
+            font-size: 17px;
+        }
+
+        .back {
+            color: #E74C3C;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* PRODUCTS */
+
+        .products {
+            padding: 40px 7%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .product:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+        }
+
+        /* YOUR OWN IMAGE */
+
+        .product img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-info h3 {
+            color: #8E44AD;
+            margin-bottom: 5px;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .price {
+            color: #E74C3C;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .cart-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            background-color: #27AE60;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-btn:hover {
+            background-color: #3498DB;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 1000px) {
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 5px;
+            }
+        }
+
+     </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🧶 Tinay's Little Loops
+    </div>
+
+    <nav>
+	<a href="index.html">Home</a>
+        <a href="amigurumi.html">Amigurumi</a>
+        <a href="crochet-garments.html">Garments</a>
+        <a href="hair-accessories.html">Hair Accessories</a>
+    </nav>
+
+    <button class="cart-button" onclick="openCart()">
+        🛒 Cart (<span id="cart-count">0</span>)
+    </button>
+
+</header>
+
+    <section class="title">
+
+        <h1>🧸 Amigurumi</h1>
+
+        <p>Our cute handmade Crochet Garments collection 💜</p>
+
+        <a href="index.html" class="back">
+            ← Back to Home
+        </a>
+
+    </section>
+
+
+<section class="category" id="bullion">
+
+    <div class="category-title">
+
+        <h2>Crochet Garments</h2>
+
+        <a href="crochet-garments.html" class="see-all">
+        </a>
+
+    </div>
+
+    <div class="products">
+
+        <div class="product">
+            <img src="tank-top.webp" alt="Tank Top">
+
+            <div class="product-info">
+
+                <h3>Tank Top</h3>
+
+                <p>Handmade Tank Top.</p>
+
+                <span class="price">₱420</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Tank Top', 420)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+        </div>
+
+
+        <div class="product">
+            <img src="swimsuit.webp" alt="Swimsuit">
+
+            <div class="product-info">
+
+                <h3>Swimsuit</h3>
+
+                <p>Sexy handmade Swimsuit.</p>
+
+                <span class="price">₱530</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Swimsuit', 530)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+        </div>
+
+
+        <div class="product">
+            <img src="short.webp" alt="Swimsuit Crochet">
+
+            <div class="product-info">
+
+                <h3>Swimsuit Crochet</h3>
+
+                <p>Simple handmade short.</p>
+
+                <span class="price">₱725</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Swimsuit Crochet', 725)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+        </div>
+
+
+        <div class="product">
+            <img src="jacket.webp" alt="Jacket Crochet">
+
+            <div class="product-info">
+
+                <h3>Jacket Crochet</h3>
+
+                <p>Bright handmade jacket.</p>
+
+                <span class="price">₱940</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Jacket Crochet', 940)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+        </div>
+
+
+        <div class="product">
+            <img src="socks.webp" alt="Socks Crochet">
+
+            <div class="product-info">
+
+                <h3>Socks Crochet</h3>
+
+                <p>Handmade crochet socks.</p>
+
+                <span class="price">₱250</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Crochet Socks', 250)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>

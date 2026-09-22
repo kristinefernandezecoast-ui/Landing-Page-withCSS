@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tinay's Little Loops</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: white;
+            color: #333;
+        }
+
+
+        header {
+            background: #8E44AD;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #27AE60;
+        }
+
+
+        .cart-button {
+            background: #E74C3C;
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-button:hover {
+            background: #3498DB;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 0 0 65px 0;
+            background: #F5EEFA;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 35px;
+        }
+
+        .hero h1 {
+            color: #8E44AD;
+            font-size: 42px;
+            margin-bottom: 10px;
+            padding: 0 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        .shop-button {
+            background: #3498DB;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .shop-button:hover {
+            background: #27AE60;
+        }
+
+
+        .category {
+            padding: 45px 7%;
+        }
+
+        .category-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .category-title h2 {
+            color: #8E44AD;
+        }
+
+        .see-all {
+            color: #E74C3C;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .product {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .product > img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-info h3 {
+            color: #8E44AD;
+            margin-bottom: 6px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            display: block;
+            color: #E74C3C;
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .cart-btn {
+            width: 100%;
+            padding: 9px;
+            border: none;
+            border-radius: 8px;
+            background: #27AE60;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-btn:hover {
+            background: #3498DB;
+        }
+
+
+        .cart-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 360px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+            z-index: 200;
+            padding: 25px;
+            transition: 0.3s;
+            overflow-y: auto;
+        }
+
+        .cart-panel.active {
+            right: 0;
+        }
+
+        .cart-panel h2 {
+            color: #8E44AD;
+            margin-bottom: 20px;
+        }
+
+        .close-cart {
+            float: right;
+            border: none;
+            background: none;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .cart-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+
+        .cart-item strong {
+            color: #8E44AD;
+        }
+
+        .quantity {
+            margin-top: 8px;
+        }
+
+        .quantity button {
+            border: none;
+            background: #3498DB;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .quantity span {
+            margin: 0 10px;
+        }
+
+        .total {
+            margin-top: 25px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #E74C3C;
+        }
+
+        .checkout {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            background: #8E44AD;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #8E44AD;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 300;
+        }
+
+        .chat-button:hover {
+            background: #3498DB;
+        }
+
+
+        /* CHAT BOX */
+
+        .chat-box {
+            display: none;
+            position: fixed;
+            bottom: 75px;
+            right: 20px;
+            width: 330px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 300;
+        }
+
+        .chat-box.active {
+            display: block;
+        }
+
+        .chat-box h2 {
+            color: #8E44AD;
+            margin-bottom: 15px;
+        }
+
+        .close-chat {
+            float: right;
+            border: none;
+            background: none;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .support-info {
+            background: #F5EEFA;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .support-info strong {
+            color: #8E44AD;
+        }
+
+        .support-info a {
+            color: #8E44AD;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .chat-box input,
+        .chat-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .chat-box textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        .send-message {
+            width: 100%;
+            padding: 10px;
+            background: #27AE60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .send-message:hover {
+            background: #3498DB;
+        }
+
+        #chatReply {
+            margin-top: 12px;
+            color: #8E44AD;
+            font-weight: bold;
+        }
+
+
+        .order-form {
+            margin-top: 15px;
+        }
+
+        .order-form h3 {
+            color: #8E44AD;
+            margin-bottom: 10px;
+        }
+
+        .order-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+
+        @media (max-width: 1000px) {
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero img {
+                height: 220px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .cart-panel {
+                width: 100%;
+            }
+
+            .chat-box {
+                width: calc(100% - 30px);
+                right: 15px;
+                bottom: 75px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🧶 Tinay's Little Loops
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="amigurumi.html">Amigurumi</a>
+
+        <a href="crochet-garments.html">Crochet Garments</a>
+
+        <a href="hair-accessories.html">Hair Accessories</a>
+
+        <a href="#" onclick="openChat(); return false;">
+            💬 Chat Support
+        </a>
+
+    </nav>
+
+    <button class="cart-button" onclick="openCart()">
+        🛒 Cart (<span id="cart-count">0</span>)
+    </button>
+
+</header>
+
+
+
+<section class="hero">
+
+    <img src="main.webp" alt="Tinay's Little Loops">
+
+    <h1>Handmade With Love 💜</h1>
+
+    <p>
+        A little yarn, A lot of love
+    </p>
+
+    <button class="shop-button"
+        onclick="document.getElementById('amigurumi').scrollIntoView()">
+        Shop Now
+    </button>
+
+</section>
+
+
+
+<section class="category" id="amigurumi">
+
+    <div class="category-title">
+
+        <h2>Amigurumi</h2>
+
+        <a href="amigurumi.html" class="see-all">
+            See All →
+        </a>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <div class="product">
+
+            <img src="stitch.webp" alt="Amigurumi Stitch">
+
+            <div class="product-info">
+
+                <h3>Amigurumi Stitch</h3>
+
+                <p>Soft and cute handmade stitch.</p>
+
+                <span class="price">₱190</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Amigurumi Stitch', 190)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="bunny.webp" alt="Amigurumi Bunny">
+
+            <div class="product-info">
+
+                <h3>Amigurumi Bunny</h3>
+
+                <p>Adorable handmade bunny.</p>
+
+                <span class="price">₱200</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Amigurumi Bunny', 200)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="puppy.jfif" alt="Amigurumi Puppy">
+
+            <div class="product-info">
+
+                <h3>Amigurumi Puppy</h3>
+
+                <p>Cute little crochet puppy.</p>
+
+                <span class="price">₱190</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Amigurumi Puppy', 190)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="Cat.webp" alt="Amigurumi Cat">
+
+            <div class="product-info">
+
+                <h3>Amigurumi Cat</h3>
+
+                <p>Small handmade cat.</p>
+
+                <span class="price">₱170</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Amigurumi Cat', 170)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="penguin.webp" alt="Amigurumi Penguin">
+
+            <div class="product-info">
+
+                <h3>Amigurumi Penguin</h3>
+
+                <p>Simple cute crochet penguin.</p>
+
+                <span class="price">₱150</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Amigurumi Penguin', 150)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="category" id="crochet-garments">
+
+    <div class="category-title">
+
+        <h2>Crochet Garments</h2>
+
+        <a href="crochet-garments.html" class="see-all">
+            See All →
+        </a>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <div class="product">
+
+            <img src="tank-top.webp" alt="Tank Top">
+
+            <div class="product-info">
+
+                <h3>Tank Top</h3>
+
+                <p>Handmade Tank Top.</p>
+
+                <span class="price">₱420</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Tank Top', 420)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="swimsuit.webp" alt="Swimsuit">
+
+            <div class="product-info">
+
+                <h3>Swimsuit</h3>
+
+                <p>Handmade Swimsuit.</p>
+
+                <span class="price">₱530</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Swimsuit', 530)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="short.webp" alt="Swimsuit Crochet">
+
+            <div class="product-info">
+
+                <h3>Swimsuit Crochet</h3>
+
+                <p>Simple handmade short.</p>
+
+                <span class="price">₱725</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Swimsuit Crochet', 725)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="jacket.webp" alt="Jacket Crochet">
+
+            <div class="product-info">
+
+                <h3>Jacket Crochet</h3>
+
+                <p>Bright handmade jacket.</p>
+
+                <span class="price">₱940</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Jacket Crochet', 940)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="socks.webp" alt="Socks Crochet">
+
+            <div class="product-info">
+
+                <h3>Socks Crochet</h3>
+
+                <p>Handmade crochet socks.</p>
+
+                <span class="price">₱250</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Crochet Socks', 250)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="category" id="hair-accessories">
+
+    <div class="category-title">
+
+        <h2>Hair Accessories</h2>
+
+        <a href="hair-accessories.html" class="see-all">
+            See All →
+        </a>
+
+    </div>
+
+
+    <div class="products">
+
+
+        <div class="product">
+
+            <img src="scrunchies.jfif" alt="Scrunchies">
+
+            <div class="product-info">
+
+                <h3>Scrunchies</h3>
+
+                <p>Warm handmade scrunchies.</p>
+
+                <span class="price">₱80</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Scrunchies', 80)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="headbands.webp" alt="Headbands">
+
+            <div class="product-info">
+
+                <h3>Headbands</h3>
+
+                <p>Simple everyday crochet headbands.</p>
+
+                <span class="price">₱70</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Headbands', 70)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="claw-clips.webp" alt="Claw Clips">
+
+            <div class="product-info">
+
+                <h3>Claw Clips</h3>
+
+                <p>Comfortable handmade claw clips.</p>
+
+                <span class="price">₱90</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Claw Clips', 90)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="hair-bows.webp" alt="Hair Bows">
+
+            <div class="product-info">
+
+                <h3>Hair Bows</h3>
+
+                <p>Soft handmade hair bows.</p>
+
+                <span class="price">₱100</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Hair Bows', 100)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="product">
+
+            <img src="hats.webp" alt="Hats">
+
+            <div class="product-info">
+
+                <h3>Hats</h3>
+
+                <p>Soft handmade hats.</p>
+
+                <span class="price">₱150</span>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Hats', 150)">
+                    🛒 Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="cart-panel" id="cartPanel">
+
+    <button class="close-cart" onclick="closeCart()">×</button>
+
+    <h2>🛒 My Cart</h2>
+
+    <div id="cart-items">
+        <p>Your cart is empty.</p>
+    </div>
+
+    <div class="total">
+        Total: ₱<span id="total">0</span>
+    </div>
+
+    <button class="checkout" onclick="checkout()">
+        Checkout
+    </button>
+
+</div>
+
+
+<button class="chat-button" onclick="openChat()">
+    💬 Chat Support
+</button>
+
+
+<div class="chat-box" id="chatBox">
+
+    <button class="close-chat" onclick="closeChat()">×</button>
+
+    <h2>💬 Chat Support</h2>
+
+
+    <div class="support-info">
+
+        <strong>📧 Email:</strong><br>
+
+        <a href="mailto:YOUR-EMAIL@example.com">
+            YOUR-EMAIL@example.com
+        </a>
+
+        <br><br>
+
+        <strong>📍 Address:</strong><br>
+
+        YOUR SHOP ADDRESS HERE
+
+    </div>
+
+
+    <input type="text"
+        id="customerName"
+        placeholder="Your Name">
+
+
+    <textarea
+        id="customerMessage"
+        placeholder="How can we help you?"></textarea>
+
+
+    <button class="send-message" onclick="sendMessage()">
+        Send Message
+    </button>
+
+
+    <p id="chatReply"></p>
+
+</div>
+
+
+
+<script>
+
+    let cart = [];
+
+
+    function addToCart(name, price) {
+
+        let existingItem =
+            cart.find(item => item.name === name);
+
+
+        if (existingItem) {
+
+            existingItem.quantity++;
+
+        } else {
+
+            cart.push({
+                name: name,
+                price: price,
+                quantity: 1
+            });
+
+        }
+
+
+        updateCart();
+
+        openCart();
+
+    }
+
+
+
+    function updateCart() {
+
+        let cartItems =
+            document.getElementById("cart-items");
+
+        let cartCount =
+            document.getElementById("cart-count");
+
+        let totalElement =
+            document.getElementById("total");
+
+
+        cartItems.innerHTML = "";
+
+        let total = 0;
+
+        let count = 0;
+
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML =
+                "<p>Your cart is empty.</p>";
+
+        }
+
+
+        cart.forEach((item, index) => {
+
+            total += item.price * item.quantity;
+
+            count += item.quantity;
+
+
+            cartItems.innerHTML += `
+
+                <div class="cart-item">
+
+                    <strong>${item.name}</strong>
+
+                    <br>
+
+                    ₱${item.price} each
+
+                    <div class="quantity">
+
+                        <button onclick="changeQuantity(${index}, -1)">
+                            -
+                        </button>
+
+                        <span>${item.quantity}</span>
+
+                        <button onclick="changeQuantity(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+
+        cartCount.textContent = count;
+
+        totalElement.textContent = total;
+
+    }
+
+
+
+    function changeQuantity(index, amount) {
+
+        cart[index].quantity += amount;
+
+
+        if (cart[index].quantity <= 0) {
+
+            cart.splice(index, 1);
+
+        }
+
+
+        updateCart();
+
+    }
+
+
+
+    function openCart() {
+
+        document
+            .getElementById("cartPanel")
+            .classList.add("active");
+
+    }
+
+
+
+    function closeCart() {
+
+        document
+            .getElementById("cartPanel")
+            .classList.remove("active");
+
+    }
+
+
+
+    function openChat() {
+
+        document
+            .getElementById("chatBox")
+            .classList.add("active");
+
+    }
+
+
+
+    function closeChat() {
+
+        document
+            .getElementById("chatBox")
+            .classList.remove("active");
+
+    }
+
+
+
+    function sendMessage() {
+
+        let name =
+            document.getElementById("customerName").value;
+
+        let message =
+            document.getElementById("customerMessage").value;
+
+
+        if (name.trim() === "" || message.trim() === "") {
+
+            alert("Please enter your name and message.");
+
+        } else {
+
+            document.getElementById("chatReply").textContent =
+                "Hi " + name +
+                "! Thank you for your message. We'll get back to you soon. 💜";
+
+            document.getElementById("customerMessage").value = "";
+
+        }
+
+    }
+
+
+
+    function checkout() {
+
+        if (cart.length === 0) {
+
+            alert("Your cart is empty!");
+
+            return;
+
+        }
+
+
+        let customerName =
+            prompt("Please enter your full name:");
+
+
+        if (customerName === null ||
+            customerName.trim() === "") {
+
+            alert("Please enter your name.");
+
+            return;
+
+        }
+
+
+        let customerEmail =
+            prompt("Please enter your email address:");
+
+
+        if (customerEmail === null ||
+            customerEmail.trim() === "") {
+
+            alert("Please enter your email.");
+
+            return;
+
+        }
+
+
+        let customerAddress =
+            prompt("Please enter your delivery address:");
+
+
+        if (customerAddress === null ||
+            customerAddress.trim() === "") {
+
+            alert("Please enter your delivery address.");
+
+            return;
+
+        }
+
+
+        let checkoutDate =
+            new Date().toLocaleDateString();
+
+
+        let orderDetails = "";
+
+
+        cart.forEach(item => {
+
+            orderDetails +=
+                item.name +
+                " x" +
+                item.quantity +
+                " = ₱" +
+                (item.price * item.quantity) +
+                "\n";
+
+        });
+
+
+        let total =
+            document.getElementById("total").textContent;
+
+
+        let confirmation =
+            "ORDER VERIFIED! ✅\n\n" +
+
+            "Customer Name: " +
+            customerName +
+
+            "\nEmail: " +
+            customerEmail +
+
+            "\nAddress: " +
+            customerAddress +
+
+            "\nCheckout Date: " +
+            checkoutDate +
+
+            "\n\nORDER:\n" +
+            orderDetails +
+
+            "\nTotal: ₱" +
+            total +
+
+            "\n\nThank you for shopping at Tinay's Little Loops! 💜";
+
+
+        alert(confirmation);
+
+
+        cart = [];
+
+        updateCart();
+
+    }
+
+</script>
+
+
+</body>
+</html>
